@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TournamentWizard.WPF.Properties
+namespace TournamentWizard.Properties
 {
 
 

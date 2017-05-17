@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TournamentWizard.WPF
+namespace TournamentWizard
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
