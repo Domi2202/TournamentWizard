@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TournamentWizard.ViewModels;
 
 namespace TournamentWizard
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SportEventControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SportEventControl : UserControl
     {
-        public MainWindow()
+        public SportEventControl()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
-        }       
+        }
     }
 }

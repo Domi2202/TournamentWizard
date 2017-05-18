@@ -18,6 +18,7 @@ namespace TournamentWizard.Models
         public int SportEventID { get; set; }
         public string Name { get; set; }
         public int FieldCount { get; set; }
+        public string Description { get; set; }
 
         //foreign Keys
         public ObservableCollection<Competition> Competitions { get; private set; }

@@ -10,6 +10,11 @@ namespace TournamentWizard.DBContext
 {
     public class SportEventContext : DbContext
     {
+        public SportEventContext() : base()
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<SportEventContext>());
+        }
+
         public DbSet<SportEvent> SportEvents { get; set; }
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<Team> Teams { get; set; }

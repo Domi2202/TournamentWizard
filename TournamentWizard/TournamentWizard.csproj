@@ -54,6 +54,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -72,7 +74,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\CustomCommand.cs" />
+    <Compile Include="CompetitionControl.xaml.cs">
+      <DependentUpon>CompetitionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SportEventDialog.xaml.cs">
+      <DependentUpon>SportEventDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Feature.cs" />
+    <Compile Include="Migrations\201705181623080_Description.cs" />
+    <Compile Include="Migrations\201705181623080_Description.Designer.cs">
+      <DependentUpon>201705181623080_Description.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SportEventControl.xaml.cs">
+      <DependentUpon>SportEventControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SportEventsViewModel.cs" />
+    <Page Include="CompetitionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\SportEventDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,12 +107,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="DBContext\SportEventContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SportEventControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\201705171543426_Initial.cs" />
@@ -109,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201705171543426_Initial.resx">
       <DependentUpon>201705171543426_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705181623080_Description.resx">
+      <DependentUpon>201705181623080_Description.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

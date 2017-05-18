@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="920" Width="1280">
+        Title="MainWindow" Height="540" Width="960" MinHeight="540" MinWidth="960">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Height" Value="20"/>
@@ -22,15 +22,43 @@
     <Window.InputBindings>
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}" CommandParameter="{Binding .Context}"/>
     </Window.InputBindings>
-    <Grid>
-        <DockPanel Height="49" LastChildFill="False" Margin="0,0,0.6,0" VerticalAlignment="Top">
-            <ToolBarTray DockPanel.Dock="Top">
-                <ToolBar>
-                    <Button Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding .Context}"/>
-                </ToolBar>
-            </ToolBarTray>
-        </DockPanel>
+    <materialDesign:DialogHost Identifier="RootDialog">
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right" Margin="16"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    <ListBox x:Name="FeatureListBox" Margin="0 16 0 16" SelectedIndex="0"                         
+                             ItemsSource="{Binding Features}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="domain:Feature">
+                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel>
+                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" DockPanel.Dock="Top">
+                    <DockPanel Height="49" LastChildFill="False" Margin="0,0,0.6,0" VerticalAlignment="Top">
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                        x:Name="MenuToggleButton"/>
+                        <ToolBarTray DockPanel.Dock="Top">
+                            <ToolBar>
+                                <Button Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding .Context}"/>
+                            </ToolBar>
+                        </ToolBarTray>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <Grid>
 
+                    <ContentControl Content="{Binding ElementName=FeatureListBox, Path=SelectedItem.ViewElement}"/>
 
-    </Grid>
+                </Grid>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Window>

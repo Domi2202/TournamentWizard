@@ -9,6 +9,7 @@ using System.ComponentModel;
 using TournamentWizard.Models;
 using TournamentWizard.DBContext;
 using TournamentWizard.Commands;
+using System.Windows.Input;
 
 namespace TournamentWizard.ViewModels
 {
@@ -19,6 +20,13 @@ namespace TournamentWizard.ViewModels
         public MainViewModel()
         {
             _context = new SportEventContext();
+            _context.SportEvents.Load();
+
+            Features = new[]
+            {
+                new Feature("Veranstaltungen", new SportEventControl() {DataContext = new SportEventsViewModel(_context) }),
+                new Feature("Turniere", new CompetitionControl())
+            };
         }
 
         #region BindingProperies
@@ -28,15 +36,17 @@ namespace TournamentWizard.ViewModels
             get { return _context; }
         }
 
+        public Feature[] Features { get; }
         #endregion
 
         #region Commands
 
-        private SaveCommand _saveCommand = new SaveCommand();
+        public ICommand SaveCommand => new CustomCommand(ExecuteSave);
 
-        public SaveCommand SaveCommand
+        public void ExecuteSave(object parameter)
         {
-            get { return _saveCommand; }
+            var context = parameter as DBContext.SportEventContext;
+            context.SaveChanges();
         }
 
         #endregion
