@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentWizard", "TournamentWizard\TournamentWizard.csproj", "{7E189181-C7EF-4162-82F0-BCD427191686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentWizard.Models", "TournamentWizard.Models\TournamentWizard.Models.csproj", "{A458BB77-0806-4A59-B9C3-71321862BE04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E189181-C7EF-4162-82F0-BCD427191686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E189181-C7EF-4162-82F0-BCD427191686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E189181-C7EF-4162-82F0-BCD427191686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E189181-C7EF-4162-82F0-BCD427191686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A458BB77-0806-4A59-B9C3-71321862BE04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A458BB77-0806-4A59-B9C3-71321862BE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A458BB77-0806-4A59-B9C3-71321862BE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A458BB77-0806-4A59-B9C3-71321862BE04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -8,7 +8,7 @@ using TournamentWizard.Models;
 
 namespace TournamentWizard.DBContext
 {
-    class SportEventContext : DbContext
+    public class SportEventContext : DbContext
     {
         public DbSet<SportEvent> SportEvents { get; set; }
         public DbSet<Competition> Competitions { get; set; }
