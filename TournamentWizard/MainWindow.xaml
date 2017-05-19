@@ -31,7 +31,7 @@
                                     HorizontalAlignment="Right" Margin="16"
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
                     <ListBox x:Name="FeatureListBox" Margin="0 16 0 16" SelectedIndex="0"                         
-                             ItemsSource="{Binding Features}">
+                             ItemsSource="{Binding Features}" MouseLeftButtonUp="FeatureListBox_MouseLeftButtonUp">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="domain:Feature">
                                 <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
@@ -41,16 +41,17 @@
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel>
+                <Menu DockPanel.Dock="Top" Height="36" Margin="0,0,-0.4,0">
+                    <MenuItem Header="_Datei" FontSize="12" Height="36">
+                        <MenuItem Header="Speichern" Command="{Binding SaveCommand}" CommandParameter="{Binding .Context}" InputGestureText="Strg + S"/>
+                    </MenuItem>
+                </Menu>
                 <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
                     <DockPanel Height="49" LastChildFill="False" Margin="0,0,0.6,0" VerticalAlignment="Top">
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                         x:Name="MenuToggleButton"/>
-                        <ToolBarTray DockPanel.Dock="Top">
-                            <ToolBar>
-                                <Button Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding .Context}"/>
-                            </ToolBar>
-                        </ToolBarTray>
+                        <Label Content="{Binding HeaderBarText}" FontSize="25" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="30,0,0,-0.2" Width="Auto"/>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>

@@ -86,10 +86,18 @@
     <Compile Include="Migrations\201705181623080_Description.Designer.cs">
       <DependentUpon>201705181623080_Description.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705191738167_MatchDuration.cs" />
+    <Compile Include="Migrations\201705191738167_MatchDuration.Designer.cs">
+      <DependentUpon>201705191738167_MatchDuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotEmptyValidationRule.cs" />
+    <Compile Include="NotifyPropertyChangedExtension.cs" />
     <Compile Include="SportEventControl.xaml.cs">
       <DependentUpon>SportEventControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CompetitionsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SportEventDialogViewModel.cs" />
     <Compile Include="ViewModels\SportEventsViewModel.cs" />
     <Page Include="CompetitionControl.xaml">
       <SubType>Designer</SubType>
@@ -141,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705181623080_Description.resx">
       <DependentUpon>201705181623080_Description.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705191738167_MatchDuration.resx">
+      <DependentUpon>201705191738167_MatchDuration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

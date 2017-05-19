@@ -5,11 +5,45 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TournamentWizard"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:twModels="clr-namespace:TournamentWizard.Models;assembly=TournamentWizard.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="800">
     <Grid>
-        <materialDesign:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">It's another Feature</TextBlock>
-        </materialDesign:Card>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" Name="CompetitionListBox" Margin="8 8 8 50" ItemsSource="{Binding Competitions}" BorderBrush="LightGray" BorderThickness="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="twModels:Competition">
+                    <TextBlock Text="{Binding CompetitionName}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Height="50" VerticalAlignment="Bottom">
+            <Button Style="{StaticResource MaterialDesignRaisedButton}" VerticalAlignment="Bottom"
+                        Margin="0,0,15,10" Width="50" HorizontalAlignment="Right" ToolTip="Neu" Background="#42a5f5" BorderBrush="#42a5f5" Command="{Binding AddCompetition}">
+                <materialDesign:PackIcon Kind="Plus" />
+            </Button>
+        </Grid>
+        <Grid Grid.Column="1" Margin="8 8 8 50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Label Width="200" VerticalContentAlignment="Center">Name des Turniers:</Label>
+                <TextBox Width="263" Margin="20,3,0,5" Text="{Binding ElementName=CompetitionListBox, Path=SelectedItem.CompetitionName}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label Width="212" VerticalContentAlignment="Center">Teilnehmende Mannschaften:</Label>
+                <Label Width="285" VerticalContentAlignment="Center" Content="{Binding ElementName=CompetitionListBox, Path=SelectedItem.Teams.Count}"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Label Width="200" VerticalContentAlignment="Center">Spieldauer (ss:mm:ss):</Label>
+                <TextBox Width="263"  Margin="20,3,0,5" Text="{Binding ElementName=CompetitionListBox, Path=SelectedItem.MatchDuration}"></TextBox>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

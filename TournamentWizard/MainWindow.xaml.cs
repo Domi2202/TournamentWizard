@@ -25,6 +25,11 @@ namespace TournamentWizard
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-        }       
+        }
+
+        private void FeatureListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MenuToggleButton.IsChecked = false;
+        }
     }
 }

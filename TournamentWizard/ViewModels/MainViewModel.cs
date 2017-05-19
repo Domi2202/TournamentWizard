@@ -10,6 +10,7 @@ using TournamentWizard.Models;
 using TournamentWizard.DBContext;
 using TournamentWizard.Commands;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace TournamentWizard.ViewModels
 {
@@ -17,15 +18,19 @@ namespace TournamentWizard.ViewModels
     {
         private SportEventContext _context;
 
+        public static SportEvent ActiveSportEvent;
+        public static event EventHandler ActiveSportEventChanged;
+
         public MainViewModel()
         {
             _context = new SportEventContext();
             _context.SportEvents.Load();
+            _context.Competitions.Load();      
 
             Features = new[]
             {
-                new Feature("Veranstaltungen", new SportEventControl() {DataContext = new SportEventsViewModel(_context) }),
-                new Feature("Turniere", new CompetitionControl())
+                new Feature("Veranstaltungen", new SportEventControl() {DataContext = new SportEventsViewModel(_context, ExecuteLoadSportEvent) }),
+                new Feature("Turniere", new CompetitionControl() {DataContext = new CompetitionsViewModel() })
             };
         }
 
@@ -37,6 +42,18 @@ namespace TournamentWizard.ViewModels
         }
 
         public Feature[] Features { get; }
+
+        public string HeaderBarText
+        {
+            get
+            {
+                if (ActiveSportEvent == null)
+                {
+                    return "Tournament Wizard";
+                }
+                else return ActiveSportEvent.Name;
+            }
+        }
         #endregion
 
         #region Commands
@@ -49,6 +66,20 @@ namespace TournamentWizard.ViewModels
             context.SaveChanges();
         }
 
+        public void ExecuteLoadSportEvent(object parameter)
+        {
+            var sportEvent = parameter as SportEvent;
+            ActiveSportEvent = sportEvent;
+            OnPropertyChanged("HeaderBarText");
+            OnActiveSportEventChanged();
+
+        }
+
+        private void OnActiveSportEventChanged()
+        {
+            ActiveSportEventChanged?.Invoke(this, new EventArgs());
+        }
+
         #endregion
 
         #region PropertyChanged
@@ -58,6 +89,7 @@ namespace TournamentWizard.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
         #endregion
     }
 }

@@ -16,5 +16,6 @@ namespace TournamentWizard.Models
         //foreign Keys
         public int CompetitionID { get; set; }
         public virtual Competition Competition { get; set; }
+
     }
 }

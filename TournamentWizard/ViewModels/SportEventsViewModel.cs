@@ -11,16 +11,19 @@ using TournamentWizard.DBContext;
 using TournamentWizard.Commands;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
+using System.Diagnostics;
 
 namespace TournamentWizard.ViewModels
 {
     public class SportEventsViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<SportEvent> _sportEvents;
+        private Action<object> _sportEventLoadCallback;
 
-        public SportEventsViewModel(SportEventContext context)
+        public SportEventsViewModel(SportEventContext context, Action<object> sportEventLoadCallback)
         {
             _sportEvents = context.SportEvents.Local;
+            _sportEventLoadCallback = sportEventLoadCallback;
         }
 
         public ObservableCollection<SportEvent> SportEvents
@@ -34,16 +37,36 @@ namespace TournamentWizard.ViewModels
 
         public async void ExecuteAddSportEvent(object parameter)
         {
-            var view = new Dialogs.SportEventDialog();
+            var view = new Dialogs.SportEventDialog()
+            {
+                DataContext = new SportEventDialogViewModel()
+            };
 
             var result = await DialogHost.Show(view, "RootDialog");
 
-            //_sportEvents.Add(new SportEvent()
-            //{
-            //    Name = "SportEvent",
-            //    FieldCount = 3
-            //});
+            if (result != null)
+            {
+                SportEvent newSportEvent = result as SportEvent;
+                //Debug.Write(newSportEvent.Name);
+                //Debug.Write(newSportEvent.FieldCount);
+                _sportEvents.Add((SportEvent)result);
+            }
         }
+
+        public ICommand DeleteSportEvent => new CustomCommand(ExecuteDeleteSporEvent, CanExecuteDeleteOrLoad);
+
+        public void ExecuteDeleteSporEvent(object parameter)
+        {
+            var sportEvent = parameter as SportEvent;
+            _sportEvents.Remove(sportEvent);
+        }
+
+        public bool CanExecuteDeleteOrLoad(object parameter)
+        {
+            return parameter != null;
+        }
+
+        public ICommand LoadSportEvent => new CustomCommand(_sportEventLoadCallback, CanExecuteDeleteOrLoad);
 
         #endregion
 
