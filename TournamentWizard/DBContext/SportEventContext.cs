@@ -18,5 +18,6 @@ namespace TournamentWizard.DBContext
         public DbSet<SportEvent> SportEvents { get; set; }
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Group> Groups { get; set; }
     }
 }

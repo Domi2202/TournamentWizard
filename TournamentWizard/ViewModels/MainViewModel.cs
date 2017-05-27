@@ -25,12 +25,14 @@ namespace TournamentWizard.ViewModels
         {
             _context = new SportEventContext();
             _context.SportEvents.Load();
-            _context.Competitions.Load();      
+            _context.Competitions.Load();
+            _context.Teams.Load();      
 
             Features = new[]
             {
                 new Feature("Veranstaltungen", new SportEventControl() {DataContext = new SportEventsViewModel(_context, ExecuteLoadSportEvent) }),
-                new Feature("Turniere", new CompetitionControl() {DataContext = new CompetitionsViewModel() })
+                new Feature("Turniere", new CompetitionControl() {DataContext = new CompetitionsViewModel() }),
+                new Feature("Mannschaften", new TeamControl() {DataContext = new TeamsViewModel() })
             };
         }
 

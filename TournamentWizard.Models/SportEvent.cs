@@ -21,6 +21,6 @@ namespace TournamentWizard.Models
         public string Description { get; set; }
 
         //foreign Keys
-        public ObservableCollection<Competition> Competitions { get; private set; }
+        public virtual ObservableCollection<Competition> Competitions { get; private set; }
     }
 }
