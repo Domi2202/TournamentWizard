@@ -19,7 +19,7 @@ namespace TournamentWizard.Models
         public string GroupName { get; set; }
 
         //foreign Keys
-        public Competition Competition { get; set; }
+        public virtual Competition Competition { get; set; }
         public int CompetitionID { get; set; }
         public virtual ObservableCollection<Team> Teams { get; private set; }
 

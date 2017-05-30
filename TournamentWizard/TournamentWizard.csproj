@@ -82,6 +82,9 @@
       <DependentUpon>SportEventDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Feature.cs" />
+    <Compile Include="GroupBoxControl.xaml.cs">
+      <DependentUpon>GroupBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GroupControl.xaml.cs">
       <DependentUpon>GroupControl.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
     <Compile Include="Migrations\201705271339252_GroupClassAdded.Designer.cs">
       <DependentUpon>201705271339252_GroupClassAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705291238086_GroupFix.cs" />
+    <Compile Include="Migrations\201705291238086_GroupFix.Designer.cs">
+      <DependentUpon>201705291238086_GroupFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="NotEmptyValidationRule.cs" />
     <Compile Include="NotifyPropertyChangedExtension.cs" />
     <Compile Include="SportEventControl.xaml.cs">
@@ -106,15 +113,22 @@
       <DependentUpon>TeamControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CompetitionsViewModel.cs" />
+    <Compile Include="ViewModels\GroupBoxViewModel.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SportEventDialogViewModel.cs" />
     <Compile Include="ViewModels\SportEventsViewModel.cs" />
+    <Compile Include="ViewModels\TeamAssignmentViewModel.cs" />
     <Compile Include="ViewModels\TeamsViewModel.cs" />
     <Page Include="CompetitionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\SportEventDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GroupBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705271339252_GroupClassAdded.resx">
       <DependentUpon>201705271339252_GroupClassAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705291238086_GroupFix.resx">
+      <DependentUpon>201705291238086_GroupFix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

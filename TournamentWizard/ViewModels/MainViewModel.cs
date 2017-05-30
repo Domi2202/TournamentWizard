@@ -16,32 +16,28 @@ namespace TournamentWizard.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private SportEventContext _context;
-
+        public static SportEventContext Context;
         public static SportEvent ActiveSportEvent;
         public static event EventHandler ActiveSportEventChanged;
 
         public MainViewModel()
         {
-            _context = new SportEventContext();
-            _context.SportEvents.Load();
-            _context.Competitions.Load();
-            _context.Teams.Load();      
+            Context = new SportEventContext();
+            Context.SportEvents.Load();
+            Context.Competitions.Load();
+            Context.Teams.Load();
+            Context.Groups.Load();   
 
             Features = new[]
             {
-                new Feature("Veranstaltungen", new SportEventControl() {DataContext = new SportEventsViewModel(_context, ExecuteLoadSportEvent) }),
+                new Feature("Veranstaltungen", new SportEventControl() {DataContext = new SportEventsViewModel(Context, ExecuteLoadSportEvent) }),
                 new Feature("Turniere", new CompetitionControl() {DataContext = new CompetitionsViewModel() }),
-                new Feature("Mannschaften", new TeamControl() {DataContext = new TeamsViewModel() })
+                new Feature("Mannschaften", new TeamControl() {DataContext = new TeamsViewModel() }),
+                new Feature("Gruppen", new GroupControl() {DataContext = new GroupViewModel() })
             };
         }
 
         #region BindingProperies
-
-        public SportEventContext Context
-        {
-            get { return _context; }
-        }
 
         public Feature[] Features { get; }
 
@@ -64,8 +60,7 @@ namespace TournamentWizard.ViewModels
 
         public void ExecuteSave(object parameter)
         {
-            var context = parameter as DBContext.SportEventContext;
-            context.SaveChanges();
+            Context.SaveChanges();
         }
 
         public void ExecuteLoadSportEvent(object parameter)

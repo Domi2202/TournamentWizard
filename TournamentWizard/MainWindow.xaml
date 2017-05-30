@@ -43,7 +43,7 @@
             <DockPanel>
                 <Menu DockPanel.Dock="Top" Height="36" Margin="0,0,-0.4,0">
                     <MenuItem Header="_Datei" FontSize="12" Height="36">
-                        <MenuItem Header="Speichern" Command="{Binding SaveCommand}" CommandParameter="{Binding .Context}" InputGestureText="Strg + S"/>
+                        <MenuItem Header="Speichern" Command="{Binding SaveCommand}" InputGestureText="Strg + S"/>
                     </MenuItem>
                 </Menu>
                 <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
