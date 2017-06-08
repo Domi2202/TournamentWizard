@@ -22,6 +22,5 @@ namespace TournamentWizard.Models
         public virtual Competition Competition { get; set; }
         public int CompetitionID { get; set; }
         public virtual ObservableCollection<Team> Teams { get; private set; }
-
     }
 }

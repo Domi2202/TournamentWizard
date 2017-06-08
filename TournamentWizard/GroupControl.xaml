@@ -25,6 +25,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <ListBox Grid.Column="0" Name="TeamListBox" Margin="8 8 8 50" ItemsSource="{Binding Teams}" BorderBrush="LightGray" BorderThickness="2">
                 <ListBox.ItemTemplate>
@@ -45,7 +46,7 @@
                 <Label Content="{Binding AssignmentStatus}" FontSize="16" Margin="220 10 5 5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             </Grid>
             <Grid Grid.Column="1" Margin="8 8 8 50">
-                <ListBox Name="GroupBoxListBox" ItemsSource="{Binding Groups}" Margin="8 8 8 8">
+                <ListBox Name="GroupBoxListBox" ItemsSource="{Binding Groups}" SelectedItem="{Binding ActiveGroup}" SelectedValuePath="{Binding .Group}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"/>
@@ -60,13 +61,53 @@
             </Grid>
             <Grid VerticalAlignment="Bottom" Grid.Column="1">
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" VerticalAlignment="Bottom"
-                        Margin="0,0,15,10" HorizontalAlignment="Right" ToolTip="Neu" Background="#42a5f5" BorderBrush="#42a5f5" Command="{Binding AddGroup}" CommandParameter="{Binding ElementName=CompetitionComboBox, Path=SelectedItem}">
+                        Margin="0,0,15,5" HorizontalAlignment="Right" ToolTip="Neu" Background="#42a5f5" BorderBrush="#42a5f5" Command="{Binding AddGroup}" CommandParameter="{Binding ElementName=CompetitionComboBox, Path=SelectedItem}">
                     <materialDesign:PackIcon Kind="Plus" />
                 </Button>
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" VerticalAlignment="Bottom"
-                        Margin="0,0,70,10" HorizontalAlignment="Right" ToolTip="Neu" Background="#e53935" BorderBrush="#e53935" Command="{Binding DeleteGroup}" CommandParameter="{Binding ElementName=GroupBoxListBox, Path=SelectedItem}">
+                        Margin="0,0,70,5" HorizontalAlignment="Right" ToolTip="Neu" Background="#e53935" BorderBrush="#e53935" Command="{Binding DeleteGroup}" CommandParameter="{Binding ElementName=GroupBoxListBox, Path=SelectedItem}">
                     <materialDesign:PackIcon Kind="Close" />
                 </Button>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8 0 8 8">
+                    <Label Content="Gruppenname:" Width="105" VerticalContentAlignment="Center" FontSize="14"/>
+                    <TextBox Width="175" Margin="0,3,0,5.4" Text="{Binding ElementName=GroupBoxListBox, Path=SelectedItem.Group.GroupName}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1" Margin="8 0 0 8">
+                    <Label Content="Spiele in dieser Gruppe:" FontSize="14"/>
+                    <Separator/>
+                    <Label Content="Spiele in diesem Turnier:" FontSize="14"/>
+                    <Label Content="Bespielte Felder:" FontSize="14"/>
+                    <Label Content="Benötigte Zeitscheiben:" FontSize="14"/>
+                    <Label Content="Dauer/Zeitscheibe:" FontSize="14"/>
+                    <Label Content="Benötigte Zeit:" FontSize="14"/>
+                    <Separator/>
+                    <Label Content="Spiele insgesamt:" FontSize="14"/>
+                    <Label Content="Benötigte Zeit (max):" FontSize="14"/>
+                    <Separator/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1"  Margin="0 0 8 8">
+                    <Label Content="{Binding MatchesInGroup}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Separator/>
+                    <Label Content="{Binding MatchesInCompetition}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Label Content="{Binding FieldCount}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Label Content="{Binding TimeSlicesNeededForCompetition}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Label Content="{Binding TimeNeededPerSlice}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Label Content="{Binding TimeNeededForCompetition}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Separator/>
+                    <Label Content="{Binding MatchesInSportEvent}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Label Content="{Binding SportEventGroupMatchesDuration}" FontSize="14" HorizontalContentAlignment="Right"/>
+                    <Separator/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

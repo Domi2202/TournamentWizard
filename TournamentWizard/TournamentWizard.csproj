@@ -81,7 +81,14 @@
     <Compile Include="Dialogs\SportEventDialog.xaml.cs">
       <DependentUpon>SportEventDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EliminationFinalBox.xaml.cs">
+      <DependentUpon>EliminationFinalBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\TimeSpanExtensions.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="FinalRoundControl.xaml.cs">
+      <DependentUpon>FinalRoundControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GroupBoxControl.xaml.cs">
       <DependentUpon>GroupBoxControl.xaml</DependentUpon>
     </Compile>
@@ -104,8 +111,21 @@
     <Compile Include="Migrations\201705291238086_GroupFix.Designer.cs">
       <DependentUpon>201705291238086_GroupFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705311052389_ShouldBeEmpty.cs" />
+    <Compile Include="Migrations\201705311052389_ShouldBeEmpty.Designer.cs">
+      <DependentUpon>201705311052389_ShouldBeEmpty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706071515457_ShouldBeEmpty1.cs" />
+    <Compile Include="Migrations\201706071515457_ShouldBeEmpty1.Designer.cs">
+      <DependentUpon>201706071515457_ShouldBeEmpty1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706081322354_EliminationFinalUpdated.cs" />
+    <Compile Include="Migrations\201706081322354_EliminationFinalUpdated.Designer.cs">
+      <DependentUpon>201706081322354_EliminationFinalUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="NotEmptyValidationRule.cs" />
     <Compile Include="NotifyPropertyChangedExtension.cs" />
+    <Compile Include="GroupSimCalcutaltions.cs" />
     <Compile Include="SportEventControl.xaml.cs">
       <DependentUpon>SportEventControl.xaml</DependentUpon>
     </Compile>
@@ -113,6 +133,8 @@
       <DependentUpon>TeamControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CompetitionsViewModel.cs" />
+    <Compile Include="ViewModels\EliminationFinalBoxViewModel.cs" />
+    <Compile Include="ViewModels\FinalRoundViewModel.cs" />
     <Compile Include="ViewModels\GroupBoxViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -125,6 +147,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\SportEventDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EliminationFinalBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FinalRoundControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,6 +221,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705291238086_GroupFix.resx">
       <DependentUpon>201705291238086_GroupFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705311052389_ShouldBeEmpty.resx">
+      <DependentUpon>201705311052389_ShouldBeEmpty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071515457_ShouldBeEmpty1.resx">
+      <DependentUpon>201706071515457_ShouldBeEmpty1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081322354_EliminationFinalUpdated.resx">
+      <DependentUpon>201706081322354_EliminationFinalUpdated.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

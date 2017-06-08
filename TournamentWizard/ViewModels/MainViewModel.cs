@@ -33,7 +33,8 @@ namespace TournamentWizard.ViewModels
                 new Feature("Veranstaltungen", new SportEventControl() {DataContext = new SportEventsViewModel(Context, ExecuteLoadSportEvent) }),
                 new Feature("Turniere", new CompetitionControl() {DataContext = new CompetitionsViewModel() }),
                 new Feature("Mannschaften", new TeamControl() {DataContext = new TeamsViewModel() }),
-                new Feature("Gruppen", new GroupControl() {DataContext = new GroupViewModel() })
+                new Feature("Gruppen", new GroupControl() {DataContext = new GroupViewModel() }),
+                new Feature("Endrunde", new FinalRoundControl() { DataContext = new FinalRoundViewModel() })
             };
         }
 

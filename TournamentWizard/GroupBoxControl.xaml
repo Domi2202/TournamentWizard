@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Width="300" Height="300">
-        <materialDesign:Card Margin="-3,-3,-3,-3" VerticalAlignment="Stretch">
+        <materialDesign:Card Margin="-3,-3,-3,-3" VerticalAlignment="Stretch" Background="#dcedc8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
@@ -16,7 +16,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Margin="8 8 8 8" Text="{Binding .Group.GroupName}"/>
-                <ListBox Grid.Row="1" Margin="8 8 8 8" BorderBrush="LightGray" BorderThickness="2" ItemsSource="{Binding Teams}">
+                <ListBox Grid.Row="1" Margin="8 8 8 8" BorderBrush="LightGray" BorderThickness="2" ItemsSource="{Binding Teams}" Background="White">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

@@ -30,6 +30,16 @@ namespace TournamentWizard.ViewModels
             get { return _group; }
             set { _group = value; }
         }
+        /// <summary>
+        /// Calculates the expected number of matches in the connected group
+        /// </summary>
+        public int MatchesInGroup
+        {
+            get
+            {
+                return GroupSimCalcutaltions.ExpectedNumberOfGroupMatches(_group);
+            }
+        }
 
         public ObservableCollection<TeamAssignmentViewModel> Teams
         {

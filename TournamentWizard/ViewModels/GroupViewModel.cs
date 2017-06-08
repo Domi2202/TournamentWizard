@@ -12,17 +12,20 @@ using TournamentWizard.Commands;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using System.Diagnostics;
+using TournamentWizard.Extensions;
 
 namespace TournamentWizard.ViewModels
 {
     public class GroupViewModel : INotifyPropertyChanged
     {
         private Competition _activeCompetition;
+        private GroupBoxViewModel _selectedGroupVM;
 
         public GroupViewModel()
         {
             MainViewModel.ActiveSportEventChanged += ReloadView;
-            TeamAssignmentViewModel.TeamAssignmentChanged += CheckAssignmentState;
+            TeamAssignmentViewModel.TeamAssignmentChanged += CheckAssignmentStatus;
+            TeamAssignmentViewModel.TeamAssignmentChanged += ReloadInformationRoster;
         }
 
         #region bindingProperties
@@ -32,7 +35,8 @@ namespace TournamentWizard.ViewModels
             set
             {
                 _activeCompetition = value;
-                OnPropertyChanged(new[] { "Teams", "Groups", "AssignmentStatus" });
+                OnPropertyChanged(new[] { "Teams", "Groups", "AssignmentStatus"});
+                ReloadInformationRoster();
             }
         }
 
@@ -83,7 +87,9 @@ namespace TournamentWizard.ViewModels
                 return groupItems;
             }
         }
-
+        /// <summary>
+        /// Returns a string that shows the number of teams assigned to a group and the total number of teams in the Group
+        /// </summary>
         public string AssignmentStatus
         {
             get
@@ -96,6 +102,135 @@ namespace TournamentWizard.ViewModels
                     return assigned + "/" + total;
                 }
                 else return "0/0";
+            }
+        }
+        /// <summary>
+        /// Get or set the Group selected in the ListBox
+        /// </summary>
+        public GroupBoxViewModel ActiveGroup
+        {
+            get { return _selectedGroupVM; }
+            set
+            {
+                _selectedGroupVM = value;
+                OnPropertyChanged("MatchesInGroup");
+            }
+        }
+
+        /// <summary>
+        /// Calculates the expected number of Matches in a Group
+        /// </summary>
+        public int MatchesInGroup
+        {
+            get
+            {
+                if (_selectedGroupVM != null)
+                {
+                    return _selectedGroupVM.MatchesInGroup;
+                }
+                return 0;
+            }
+        }
+        /// <summary>
+        /// Calculates the expected number of Matches in a Competition
+        /// </summary>
+        public int MatchesInCompetition
+        {
+            get
+            {
+                try
+                {
+                    return GroupSimCalcutaltions.ExpectedNumberOfGroupMatches(_activeCompetition);
+                }
+                catch { }
+                return 0;
+            }
+        }
+        /// <summary>
+        /// returns the field count of the active SportEvent
+        /// </summary>
+        public int FieldCount
+        {
+            get
+            {
+                try
+                {
+                    return MainViewModel.ActiveSportEvent.FieldCount;
+                }
+                catch { }
+                return 0;
+            }         
+        }
+        /// <summary>
+        /// returns the number of time slices needed for the current expected number of matches
+        /// </summary>
+        public double TimeSlicesNeededForCompetition
+        {
+            get
+            {
+                try
+                {
+                    return GroupSimCalcutaltions.TimeSlicesNeeded(GroupSimCalcutaltions.ExpectedNumberOfGroupMatches(_activeCompetition), MainViewModel.ActiveSportEvent.FieldCount);
+                }
+                catch { }
+                return 0;
+            }
+        }
+        /// <summary>
+        /// returns the match duration of the currently selected competition
+        /// </summary>
+        public TimeSpan TimeNeededPerSlice
+        {
+            get
+            {
+                try
+                {
+                    return _activeCompetition.MatchDuration;
+                }
+                catch { }
+                return new TimeSpan();
+            }
+        }
+        /// <summary>
+        /// returns the TimeSpan needed for all group matches of the current competition
+        /// </summary>
+        public TimeSpan TimeNeededForCompetition
+        {
+            get
+            {
+                try
+                {
+                    int timeSlicesNeeded = (int)Math.Ceiling(GroupSimCalcutaltions.TimeSlicesNeeded(GroupSimCalcutaltions.ExpectedNumberOfGroupMatches(_activeCompetition), MainViewModel.ActiveSportEvent.FieldCount));
+                    return TimeSpanExtension.Multiply(_activeCompetition.MatchDuration, timeSlicesNeeded);
+                }
+                catch { }
+                return new TimeSpan();
+            }
+        }
+
+        public int MatchesInSportEvent
+        {
+            get
+            {
+                try
+                {
+                    return GroupSimCalcutaltions.ExpectedNumberOfGroupMatches(MainViewModel.ActiveSportEvent);
+                }
+                catch { }
+                return 0;
+            }
+        }
+
+        public TimeSpan SportEventGroupMatchesDuration
+        {
+            get
+            {
+                try
+                {
+                    return GroupSimCalcutaltions.TotalTimeNeededForGroupMatches(MainViewModel.ActiveSportEvent);
+                }
+                catch { }
+                return new TimeSpan();
             }
         }
         #endregion
@@ -165,17 +300,48 @@ namespace TournamentWizard.ViewModels
         /// </summary> }
         private void ReloadView(object sender, EventArgs e)
         {
-            OnPropertyChanged("Competitions");
+            OnPropertyChanged(new[] { "Competitions",});
+            ReloadInformationRoster();
         }
         /// <summary>
         /// Checks the current number of assigned teams
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckAssignmentState(object sender, EventArgs e)
+        private void CheckAssignmentStatus(object sender, EventArgs e)
         {
-            OnPropertyChanged("AssignmentStatus");
+            OnPropertyChanged(new[] {
+                "AssignmentStatus",
+                "MatchesInGroup"
+            });
         }
+        /// <summary>
+        /// Reloads the whole right hand roster fields
+        /// </summary>
+        private void ReloadInformationRoster()
+        {
+            OnPropertyChanged(new[] {
+                "MatchesInGroup",
+                "MatchesInCompetition",
+                "FieldCount",
+                "TimeSlicesNeededForCompetition" ,
+                "TimeNeededPerSlice",
+                "TimeNeededForCompetition",
+                "MatchesInSportEvent",
+                "SportEventGroupMatchesDuration"
+            });
+        }
+        /// <summary>
+        /// Reloads the whole right hand roster fields as an EventHandler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReloadInformationRoster(object sender, EventArgs e)
+        {
+            ReloadInformationRoster();
+        }
+
+        
         #endregion
     }
 }

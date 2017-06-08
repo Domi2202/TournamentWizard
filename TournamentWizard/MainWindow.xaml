@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Tournament Wizard" Height="540" Width="960" MinHeight="540" MinWidth="960">
+        Title="Tournament Wizard" Height="920" Width="1280" MinHeight="540" MinWidth="960">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Height" Value="20"/>

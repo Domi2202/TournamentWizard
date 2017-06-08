@@ -13,6 +13,7 @@ namespace TournamentWizard.Models
         {
             Teams = new ObservableCollection<Team>();
             Groups = new ObservableCollection<Group>();
+            EliminationFinals = new ObservableCollection<EliminationFinal>();
         }
 
         //private Keys
@@ -25,5 +26,6 @@ namespace TournamentWizard.Models
         public SportEvent SportEvent { get; set; }
         public virtual ObservableCollection<Team> Teams { get; private set; }
         public virtual ObservableCollection<Group> Groups { get; private set; }
+        public virtual ObservableCollection<EliminationFinal> EliminationFinals { get; set; }
     }
 }

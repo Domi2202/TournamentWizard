@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Competition.cs" />
+    <Compile Include="EliminationFinal.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="SportEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
